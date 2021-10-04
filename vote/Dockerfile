@@ -1,25 +1,34 @@
-# Using official python runtime base image
+#Empleo de imagen oficial de python
 FROM python:3.9-slim
 
-# add curl for healthcheck, add apache2-utils for seeding with "ab"
+#Adición de curl y apache2-utils
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     apache2-utils \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Set the application directory
+#Metadatos de la aplicación
+LABEL maintainer="alejo.bernal22@gmail.com" \
+    description="Aplicación frontend | Grupo 9 Módulo Contenedores" \
+    version="1.0"
+
+#Configuración de variables
+ENV OPTION_A="perros"
+ENV OPTION_B="gatos"
+
+#Directorio de aplicación
 WORKDIR /app
 
-# Install our requirements.txt
+#Instalación de requermientos
 COPY requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy our code from the current folder to /app inside the container
+#Copiado de código
 COPY . .
 
-# Make port 80 available for links and/or publish
+#Eposición de puerto
 EXPOSE 80
 
-# Define our command to be run when launching the container
+#Ejecución de comandos al momento de ejecución
 CMD ["gunicorn", "app:app", "-b", "0.0.0.0:80", "--log-file", "-", "--access-logfile", "-", "--workers", "4", "--keep-alive", "0"]
