@@ -1,5 +1,5 @@
 Example Voting App
-=========
+========
 
 [![Lint Code Base](https://github.com/BretFisher/example-voting-app/actions/workflows/call-super-linter.yaml/badge.svg)](https://github.com/BretFisher/example-voting-app/actions/workflows/call-super-linter.yaml)
 [![Build Result](https://github.com/BretFisher/example-voting-app/actions/workflows/call-docker-build-result.yaml/badge.svg)](https://github.com/BretFisher/example-voting-app/actions/workflows/call-docker-build-result.yaml)
